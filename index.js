@@ -1,12 +1,19 @@
 import React from 'react'
-import { render } from 'react-dom'
-import {Router, Route, hashHistory} from 'react-router'
-import Repo from './modules/Repo'
-import About from './modules/About'
+import ReactDOM from 'react-dom'
+import {Router, hashHistory} from 'react-router'
+import Routes from './Routes'
 
-render(( 
-    <Router history={hashHistory}>
-        <Route path="Index" component={Repo} />
-        <Route path="about" component={About} />
-    </Router> )
-    , document.getElementById('app'));
+if (typeof document !== 'undefined') {
+    module.exports =
+    ReactDOM.render(
+        <Router history={hashHistory} routes={Routes}/>)
+        , document.getElementById('app');
+
+}
+else {
+    module.exports = function render(locals, callback) {
+        callback(null, '<html>...</html>');
+    }
+};
+
+
